@@ -29,7 +29,7 @@ Scoreboard Page (/scoreboard)
   - Data 
     - Current user
     - SQL Data for users and their scores
-  - Link: /scoreboard/<user>
+  - Link: /scoreboard/\<user\>
   - Tests
     - Have a test SQL table with data we know. E.g. 3 entries. We can then test to make sure the table is rendered with the correct order of users
     - Read each entry and compare with the user data in SQL Table

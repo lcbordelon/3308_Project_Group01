@@ -18,3 +18,19 @@ How to Play Page (/howto)
 Gameboard Page (/game)
 
 Scoreboard Page (/scoreboard)
+
+  - Description 
+    - Visual Page to see the highscores.
+    - Option to filter the highscores to only see your own
+    - The highscore page will show the players position on the leaderboard, their score, and their name
+    - ![Scoreboard](Img/Scoreboard.png? "Scoreboard")
+  - Parameters
+    - The current user logged in <user>. That way we know who to filter for when toggled 
+  - Data 
+    - Current user
+    - SQL Data for users and their scores
+  - Link: /scoreboard/<user>
+  - Tests
+    - Have a test SQL table with data we know. E.g. 3 entries. We can then test to make sure the table is rendered with the correct order of users
+    - Read each entry and compare with the user data in SQL Table
+    - Toggle user only and make sure no other users information is displayed

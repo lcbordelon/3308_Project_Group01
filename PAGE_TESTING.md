@@ -1,5 +1,5 @@
 Welcome Page (/welcome)
- Description
+ Description \n
 • Button to login
 • Button to view scoreboard
 • Welcome text at top
@@ -10,6 +10,7 @@ Welcome Page (/welcome)
 • Global header
  Tests
 • Read the paragraph, header, and button tags to verify they loaded
+![WelcomePageMockup](Img/welcome_page.jpg?raw=true "Title")
 
 Login Page (/login)
 

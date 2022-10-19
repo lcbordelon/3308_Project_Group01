@@ -10,7 +10,7 @@ Welcome Page (/welcome)
     - Global header
   - Tests
     - Read the paragraph, header, and button tags to verify they loaded
- ![LoginPageMockup](Img/login_page.png?raw=true "Title")
+ ![WelcomePageMockup](Img/welcome_page.jpg?raw=true "Welcome")
 
 Login Page (/login)
   - section for registered users 
@@ -22,7 +22,7 @@ Login Page (/login)
     - database connection for storing users
     - global header
   - tests for validating an existing user, a user entering an invalid email or password
-![LoginPageMockup](Img/login_page.png?raw=true "Title")
+![LoginPageMockup](Img/login_page.png?raw=true "Login")
 
 How to Play Page (/howto)
 

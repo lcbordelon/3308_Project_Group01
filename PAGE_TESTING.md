@@ -25,6 +25,21 @@ Login Page (/login)
 ![LoginPageMockup](Img/login_page.png?raw=true "Login")
 
 How to Play Page (/howto)
+  - Description
+    - Page to help players understand how to play
+    - Basic gameplay functions explained
+    - Advanced tips to play better
+  - No paramaters needed
+  - Data
+    - Need images to show how to play game
+  - Link
+    - /howtwo
+    - link back to main page /welcome
+  - Tests
+    - Read instructions on the page to veryify the correct information is showing
+    - Check to see if images are displaying properly
+![Howto](Img/HowtoPage.png? "Howto")
+        
 
 Gameboard Page (/game)
 

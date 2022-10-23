@@ -48,6 +48,7 @@ Nathan
         **Status (Pass/Fail):** Pass<br>
         **Notes:** N/A <br>
         **Post-conditions:** Scoreboard contains the best 10 scores and will update if the user gets a better score. <br>   
+
 Natalie
 - Login Table:
   - Description

@@ -68,16 +68,29 @@ Natalie
 
 Zach
 - User Stats:
-  - Description
-  - Parameters
-  - return values
+  - Description: A table holding various stats the user has from playing games.
+  - Parameters: Username of the user getting stats from.
+  - return values: username \<TEXT\>, games played \<INTEGER\>, games won \<INTEGER\>, games lost \<INTEGER\>, mines defused \<INTEGER\>
   - List of tests for verifying each access method
-    - **Use case name** <br>
-        **Description:** <br>
-        **Pre-conditions:** <br> 
+    - **Use case name** User can see correct stats. <br>
+        **Description:** Test that valid stats show up when trying to look at user stats.<br>
+        **Pre-conditions:** User is logged in.<br> 
         **Test steps:** <br> 
-        **Expected result:** <br>
-        **Actual result:** <br>
-        **Status (Pass/Fail):** <br>
-        **Notes:** <br>
-        **Post-conditions:** <br>
+            1. Go to user stats page while logged in. <br>
+            2. Look at the stats on the page. <br>
+        **Expected result:** User should see stats.<br>
+        **Actual result:** User navigated to page which should show data related to games played <br>
+        **Status (Pass/Fail):** Pass <br>
+        **Notes:** N/A<br>
+        **Post-conditions:** User navigated to page containing stats.<br>
+    - **Use case name** Stats update correctly. <br>
+        **Description:** Verify the the data stored in the table changes as games are played.<br>
+        **Pre-conditions:** User is logged in.<br> 
+        **Test steps:** <br> 
+            1. Play a game to get new stats. <br>
+            2. Look at the stats on the page to see if they upodated. <br>
+        **Expected result:** Stats should change depending on what happened during the game.<br>
+        **Actual result:** Values in the data base should change correctly. <br>
+        **Status (Pass/Fail):** Pass<br>
+        **Notes:** N/A<br>
+        **Post-conditions:** User stats will match what happened during the game and update accordingly.<br>

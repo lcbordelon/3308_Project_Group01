@@ -16,9 +16,9 @@ Nathan
             <br> 3. Navigate to scoreboard page.
         <br>
         **Expected result:** The username is now on the scoreboard table and one score is entered.<br>
-        **Actual result:** User and their score has been added to the table and is displaying in the correct position on the webpage scoreboard.
-        **Status (Pass/Fail):** Pass
-        **Notes:** This is only testing if the username and one score is entered correctly. 
+        **Actual result:** User and their score has been added to the table and is displaying in the correct position on the webpage scoreboard.<br>
+        **Status (Pass/Fail):** Pass<br>
+        **Notes:** This is only testing if the username and one score is entered correctly. <br>
         **Post-conditions:** User scores are adding to the table correctly. The account username has an entry in the scoreboard table. <br>
     - **Use case name:** Verify a user can see global top scores. <br>
         **Description:** Test that a user can see not just their own score, but also the top scores of other players.<br>
@@ -33,7 +33,7 @@ Nathan
     - **Use case name:** Filter for the current user only scores.<br>
             **Description:** Ensure that we can display only the current users filters. <br>
             **Pre-conditions:** The user has multiple entries (games played).<br> 
-            **Test steps:** Play multiple games to enter multiple scores. Navigate to the scoreboard page. Selete the filter by curret user button. <br> 
+            **Test steps:** Play multiple games to enter multiple scores. Navigate to the scoreboard page. Select the filter by current user button. <br> 
             **Expected result:** No other users and their scores. Only the current users top 10 scores.<br>
             **Actual result:** The top 10 scores in order that the current user has.<br>
             **Status (Pass/Fail):** Pass if no other users are found.<br>
@@ -51,19 +51,43 @@ Nathan
 
 Natalie
 - Login Table:
-  - Description
-  - Parameters
-  - return values
+  - Description: A table holding usernames and the passwords associated with said username.
+  - Parameters: Username, Password
+  - return values: Username, Password, and probably email.
   - List of tests for verifying each access method
-    - **Use case name** <br>
-        **Description:** <br>
-        **Pre-conditions:** <br> 
-        **Test steps:** <br> 
-        **Expected result:** <br>
-        **Actual result:** <br>
-        **Status (Pass/Fail):** <br>
+    - **Use case name** Valid username and password entered.<br>
+        **Description:** Test to see if entering valid/correct credentials results in correct return values.<br>
+        **Pre-conditions:** Valid credentials exist in database.<br> 
+        **Test steps:** <br>
+            1. Submit test username and password that are known to exist in table.
+            2. Verify the database returns a row from the database using .fetchone().
+        **Expected result:** Database returns expected data. <br>
+        **Actual result:** Database returns expected data and nothing else. <br>
+        **Status (Pass/Fail):** Pass<br>
         **Notes:** <br>
-        **Post-conditions:** <br>
+        **Post-conditions:** If a return is received logged in status will be triggered.<br>
+    - **Use case name** Valid username and invalid password entered.<br>
+        **Description:** Test to see if entering valid/correct username with incorrect password results in no return values.<br>
+        **Pre-conditions:** Valid credentials exist in database.<br> 
+        **Test steps:** <br>
+            1. Submit test username that is known to exist in table and a non-matching password.
+            2. Verify the database fails to return a row from the database using .fetchone().
+        **Expected result:** Database returns no data. <br>
+        **Actual result:** Database returns no data. <br>
+        **Status (Pass/Fail):** Pass<br>
+        **Notes:** This is important because we need users to be able to be authenticated to avoid anyone else to be able to log in to that account. <br>
+        **Post-conditions:** A message will be given to the user informing them of the incorrect credentials.<br>
+    - **Use case name** Invalid username entered.<br>
+        **Description:** Test to see if entering non-existent username results in no return values.<br>
+        **Pre-conditions:** Username entered known not to exist in database.<br> 
+        **Test steps:** <br>
+            1. Submit test username that is known not to exist in the database and any password (p/w doesn't matter in this test).
+            2. Verify the database fails to return a row from the database using .fetchone().
+        **Expected result:** Database returns no data. <br>
+        **Actual result:** Database returns no data. <br>
+        **Status (Pass/Fail):** Pass<br>
+        **Notes:** If somehow there is a return it would mean some other user's account was logged into.<br>
+        **Post-conditions:** A message will be given to the user informing them of the incorrect credentials.<br>
 
 
 Zach

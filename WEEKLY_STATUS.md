@@ -11,3 +11,6 @@ Planned webpages, initial requirements for the Welcome page, divided the page re
 Decided on overall color scheme - dark, black/gray/etc.
 
 ![WeeklyStatusOct09](Img/WeeklyUpdate_10092022.png?raw=true "Title")
+
+
+11/17/2022

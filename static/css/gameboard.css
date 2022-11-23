@@ -1,0 +1,12 @@
+.square {
+    background-color: gray;
+    border: 1px;
+    padding: 5px;
+
+}
+
+.board {
+    width: 260px;
+    margin: 10px auto;
+    position: relative;
+  }

@@ -24,6 +24,7 @@ Game board - Natalie & Nathan
 HTML pages (welcome, how to play, gameboard, scoreboard) - Zach
 Login Page (front & backend) - Lindsay
 
-One these items are completed, will move on to:
+One these items are completed, will move on to:l
+
 Storing player's score and displaying on scoreboard
 ![WeeklyStatusNov17](Img/WeeklyUpdate_11172022.png?raw=true "Title")

@@ -13,7 +13,7 @@ class PrefixMiddleware(object):
         # set the prefix for all url to the Jupyterhub URL for my virtual machine
         # this path is set to my user [KNOX] and port [3308] 
         # (see the code at bottom to see how port is set to 3308 instead of 5000)
-        environ['SCRIPT_NAME'] = "/user/nadr7654/proxy/5000/" 
+        environ['SCRIPT_NAME'] = "/" 
        
         # call the default processing
         return self.app(environ, start_response)
@@ -24,11 +24,15 @@ app.wsgi_app = PrefixMiddleware(app.wsgi_app)
 
 @app.route('/')
 def index():
-    return '<h1>Hello Group 01!</h1>'
+    return render_template('index.html', title="Index")
+
+@app.route('/login')
+def login():
+    return render_template('login.html', title="Login Page")
 
 @app.route('/game')
 def game():
-    return render_template('gameboard.html')
+    return render_template('gameboard.html', title="Game Page")
 
 
 with app.test_request_context():

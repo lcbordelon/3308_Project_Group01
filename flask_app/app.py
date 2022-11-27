@@ -36,9 +36,9 @@ def index():
 @app.route('/login')
 def login():
     conn = get_db_connection()
-    posts = conn.execute('SELECT * FROM users').fetchall()
+    users = conn.execute('SELECT * FROM users').fetchall()
     conn.close()
-    return render_template('login.html', title="Login Page")
+    return render_template('login.html', users = users)
 
 @app.route('/game')
 def game():

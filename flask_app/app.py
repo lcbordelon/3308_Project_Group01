@@ -1,3 +1,4 @@
+import sqlite3
 from flask import Flask, redirect, g, url_for, request, render_template, make_response
 #from flask import Flask
 
@@ -22,12 +23,21 @@ class PrefixMiddleware(object):
 app.wsgi_app = PrefixMiddleware(app.wsgi_app)
 
 
+def get_db_connection():
+    conn = sqlite3.connect('database.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
 @app.route('/')
 def index():
     return render_template('index.html', title="Index")
 
 @app.route('/login')
 def login():
+    conn = get_db_connection()
+    posts = conn.execute('SELECT * FROM users').fetchall()
+    conn.close()
     return render_template('login.html', title="Login Page")
 
 @app.route('/game')

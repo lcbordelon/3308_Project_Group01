@@ -1,12 +1,30 @@
-.square {
-    background-color: gray;
-    border: 1px;
-    padding: 5px;
-
+/* New addition */
+.gameboard { 
+    margin:1em auto; 
+    border-collapse:collapse 
 }
 
-.board {
-    width: 260px;
-    margin: 10px auto;
-    position: relative;
-  }
+.gameboard td {
+    cursor:pointer;
+    width:30px; 
+    height:30px;
+    border:3px solid rgb(110, 110, 110);
+    text-align:center;
+    font-family:fantasy; 
+    font-size:13px;
+}
+
+.gameboard td:hover {
+    background-color: rgb(185, 185, 185);
+}
+
+.gameboard td.clicked {
+    background-color:rgb(110, 110, 110);
+    font-weight:bold; 
+    color:blue;
+}
+
+.main_title{
+    text-align: center;
+    padding-top: 10%;
+}

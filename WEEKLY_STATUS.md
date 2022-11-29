@@ -16,8 +16,6 @@ Decided on overall color scheme - dark, black/gray/etc.
 Still working on webpage design ideas for the PAGE_TESTING.md milestone. Discussed some visual and practical elements.
 No extra cards have been added to Trello just yet as we are still working on the same tasks.
 
-> > > > > > > f2ee6947cca080884e3c46d0299044e9a31b5607
-
 11/17/2022
 Reviewed who is working on what over the next two weeks.
 Game board - Natalie & Nathan
@@ -28,3 +26,12 @@ One these items are completed, will move on to:l
 
 Storing player's score and displaying on scoreboard
 ![WeeklyStatusNov17](Img/WeeklyUpdate_11172022.png?raw=true "Title")
+
+11/28/2022
+Lindsay - Login page, posting to database. Navbar. Need to add to gameboard page.
+Nathan - Adding on click event to gameboard. Build static version first and then build random board once static board is finished.
+Zach - Home page, Scoreboard page.
+Natalie - Accomplished the gameboard, 9x9 display. Working on About page.
+
+Storing player's score and displaying on scoreboard
+![WeeklyStatusNov28](Img/WeeklyUpdate_11282022.png?raw=true "Title")

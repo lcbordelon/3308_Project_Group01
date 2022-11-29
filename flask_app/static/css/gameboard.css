@@ -19,10 +19,23 @@
 }
 
 .gameboard td.clicked {
-    background-color:rgb(110, 110, 110);
+    background-color:rgb(189, 189, 189);
     font-weight:bold; 
     color:blue;
 }
+
+.gameboard td.clicked_2 {
+    background-color:rgb(200, 197, 197);
+    font-weight:bold; 
+    color:green;
+}
+
+.gameboard td.clicked_3 {
+    background-color:rgb(213, 213, 213);
+    font-weight:bold; 
+    color:red;
+}
+
 
 .main_title{
     text-align: center;

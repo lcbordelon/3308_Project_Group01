@@ -1,5 +1,7 @@
+// Create seen 2D array. 0=unseen, 1=seen, 2=flag
 const seen = build_seen_board(9, 9);
 
+// Store bomb locations
 var bomb_locations = random_bomb();
 
 // Build a 9 by 9 gameboard and the function we want to run when the cell is clicked
@@ -19,6 +21,11 @@ var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col
             element.innerHTML = "B";
             return false;
         }
+    }
+
+    // Check if clicking on flag, if so reset to "unseen" for expand function below
+    if (seen[row][col] == 2){
+        seen[row][col] = 0
     }
 
     // Expand around 
@@ -44,7 +51,7 @@ function expand(row, col, bomb_locations){
     }
 
     // Stop if we have already revelead this tile
-    if (seen[row][col] == 1){
+    if (seen[row][col] == 1 || seen[row][col] == 2){
         return false;
     }
 
@@ -81,7 +88,6 @@ function expand(row, col, bomb_locations){
             expand(row+i, col+j, bomb_locations);
         }
     }
-
 }
 
 
@@ -181,6 +187,24 @@ function build_gameboard(rows, cols, bomb_locations, cell_function){
                     cell_function(element,r,c,i);
                 }
             })(cell,r,c,i),false);
+
+            // Add right click flag functionality 
+            cell.addEventListener('contextmenu', (function(element, r,c,i){
+                return function(){
+                    // Set Flag in cell if unseen
+                    if (seen[r][c] == 0){
+                        console.log("Adding flag to:", r, c);
+                        var table = document.getElementsByClassName("gameboard")[0];
+                        table.rows[r].cells[c].innerHTML = "F"
+                        seen[r][c] = 2;
+                    }
+                }
+            })(cell,r,c,i),false);
+            
+            // Block right click menu
+            window.oncontextmenu = (e) => {
+                e.preventDefault()
+            }
 
             // Increment i
             i += 1;

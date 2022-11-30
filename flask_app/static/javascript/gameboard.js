@@ -96,23 +96,33 @@ function check_surrounding(row, col, bomb_locations){
 
 
 
-function random_bomb(number_of_bombs){
+
+function random_bomb(number_of_bombs = 9){
     // IN PROGRESS
     
     // Randomize 9 bombs
-    var bomb_location = []
-    
-    for (let i=0; i<9; i++){
+    const bomb_location = []
+    let i=0;
+    while (i<number_of_bombs){
         var one = Math.floor(Math.random() * 10);
         var two = Math.floor(Math.random() * 10);
-    }
-    
+        let already_placed = false;
+        if (bomb_location.length === 0) {
+            bomb_location.push([one, two])
+            continue;
+        }
+        for (let j = 0; j < bomb_location.length; index++) {
+            if (bomb_location[0] === one && bomb_location[1] === two) {
+                already_placed = true;
+                break;
+            }
+        }
+        if (already_placed === false) {
+            bomb_location.push([one, two])
+            i++;
+        }
+    }   
     return bomb_location;
-}
-
-function fixed_bomb_locations(){
-    var bombs = [[1,2], [2,3], [3,4], [4,4], [5,5], [6,6], [7,7]]
-    return bombs
 }
 
 

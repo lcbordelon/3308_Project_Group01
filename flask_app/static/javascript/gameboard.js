@@ -1,36 +1,53 @@
-// Create seen 2D array. 0=unseen, 1=seen, 2=flag
-const seen = build_seen_board(9, 9);
+// Create seen 2D array. 0=unseen, 1=seen, 3=bomb
+var location_map = build_seen_board(9, 9);
+var flag_map = build_seen_board(9, 9);
+
+// One flag per bomb allowed
+var flag_count = 0;
+const flag_max = 10;
 
 // Store bomb locations
 var bomb_locations = random_bomb();
 
 // Build a 9 by 9 gameboard and the function we want to run when the cell is clicked
 var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col, i) {
-    // Display what we are clicking on to help debug
-    console.log("Clicked on element:", element);
-    console.log("Clicked on row:", row);
-    console.log("Clicked on col:", col);
-
-    // Append to our selected list and log for debugging
-    console.log("Array clicked is: ", seen);
-
     // Check if the current row col is a bomb location
-    for (var b = 0; b < bomb_locations.length; b++) { 
-        if (bomb_locations[b][0] == row && bomb_locations[b][1] == col){
-            console.log("KABLAM!"); 
-            element.innerHTML = "B";
-            return false;
-        }
+    if (location_map[row][col] == 3){
+        console.log("KABLAM!"); 
+        element.innerHTML = "B";
+        return false;
     }
 
     // Check if clicking on flag, if so reset to "unseen" for expand function below
-    if (seen[row][col] == 2){
-        seen[row][col] = 0
+    if (flag_map[row][col] == 1){
+        element.innerHTML = "";
+        flag_map[row][col] = 0;
+        flag_count--;
     }
 
     // Expand around 
     expand(row, col, bomb_locations);
+
+    // Chheck if player wins!
+    var status = check_winner();
+    if (status){
+        console.log("WINNER");
+    }
 });
+
+
+function check_winner(){
+    // Loop through location map and see if no 0s are left
+    for(let i=0; i<location_map.length; i++){
+        for(let j=0; j<location_map[i].length; j++){
+            // If we find a 0 then that means a cell is unseen or unflagged
+            if (location_map[i][j] == 0){
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 
 function expand(row, col, bomb_locations){
@@ -50,13 +67,13 @@ function expand(row, col, bomb_locations){
         }
     }
 
-    // Stop if we have already revelead this tile
-    if (seen[row][col] == 1 || seen[row][col] == 2){
+    // Stop if we have already revelead this tile or flagged it
+    if (location_map[row][col] == 1 || flag_map[row][col] == 1){
         return false;
     }
 
     // Set this cell to seen
-    seen[row][col] = 1;
+    location_map[row][col] = 1;
 
     // Set count of cell and recurse into next
     var count_around = check_surrounding(row, col, bomb_locations)
@@ -109,17 +126,17 @@ function check_surrounding(row, col, bomb_locations){
 
 
 function build_seen_board(row, col){
-    var seen = []
+    var location_map = []
 
     for (let i=0; i<row; i++){
         var temp_row = []
         for (let j=0; j<col; j++){
             temp_row.push(0);
         }
-        seen.push(temp_row);
+        location_map.push(temp_row);
     }
 
-    return seen;
+    return location_map;
 }
 
 
@@ -149,16 +166,12 @@ function random_bomb(number_of_bombs = 9){
         }
     }
     for (let i = 0; i < bomb_location.length; i++) {
-        
+        // Fill location array with bombs
+        location_map[bomb_location[i][0]][bomb_location[i][1]] = 3;
         console.log(bomb_location[i])
     }   
     
     return bomb_location;
-}
-
-function fixed_bomb_locations(){
-    var bombs = [[1,2], [2,3], [3,4], [4,4], [5,5], [6,6], [7,7]]
-    return bombs
 }
 
 // Add the new grid to our page
@@ -191,13 +204,29 @@ function build_gameboard(rows, cols, bomb_locations, cell_function){
             // Add right click flag functionality 
             cell.addEventListener('contextmenu', (function(element, r,c,i){
                 return function(){
-                    // Set Flag in cell if unseen
-                    if (seen[r][c] == 0){
-                        console.log("Adding flag to:", r, c);
-                        var table = document.getElementsByClassName("gameboard")[0];
-                        table.rows[r].cells[c].innerHTML = "F"
-                        seen[r][c] = 2;
+                    var table = document.getElementsByClassName("gameboard")[0];
+
+                    // Check if unflagging 
+                    if (flag_map[r][c] == 1){
+                        table.rows[r].cells[c].innerHTML = "";
+                        flag_map[r][c] = 0;
+                        flag_count--;
                     }
+
+                    // Set Flag in cell if unseen
+                    else if (location_map[r][c] == 0 || location_map[r][c] == 3){
+                        // Check if we haven't flagged this location 
+                        if (flag_map[r][c] == 0){
+                            // Check if remaing flag 
+                            if (flag_count < 10){
+                                table.rows[r].cells[c].innerHTML = "F"
+                                flag_map[r][c] = 1;
+                                flag_count++;
+                            }
+                        }
+                    }
+
+                    console.log(flag_count);
                 }
             })(cell,r,c,i),false);
             

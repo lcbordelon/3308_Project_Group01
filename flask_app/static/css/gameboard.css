@@ -24,6 +24,12 @@
     color:blue;
 }
 
+.gameboard td.clicked_1 {
+    background-color:rgb(189, 189, 189);
+    font-weight:bold; 
+    color:blue;
+}
+
 .gameboard td.clicked_2 {
     background-color:rgb(200, 197, 197);
     font-weight:bold; 

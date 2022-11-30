@@ -1,4 +1,4 @@
-const selected = [];
+const seen = build_seen_board(9, 9);
 
 var bomb_locations = random_bomb();
 
@@ -10,7 +10,7 @@ var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col
     console.log("Clicked on col:", col);
 
     // Append to our selected list and log for debugging
-    console.log("Array clicked is: ", selected);
+    console.log("Array clicked is: ", seen);
 
     // Check if the current row col is a bomb location
     for (var b = 0; b < bomb_locations.length; b++) { 
@@ -44,17 +44,24 @@ function expand(row, col, bomb_locations){
     }
 
     // Stop if we have already revelead this tile
-    if (table.rows[row].cells[col].innerHTML){
+    if (seen[row][col] == 1){
         return false;
     }
 
+    // Set this cell to seen
+    seen[row][col] = 1;
+
     // Set count of cell and recurse into next
     var count_around = check_surrounding(row, col, bomb_locations)
-    table.rows[row].cells[col].innerHTML = count_around
-
+    if (count_around > 0){
+        table.rows[row].cells[col].innerHTML = count_around
+    }
+    if (count_around == 0){
+        table.rows[row].cells[col].className = 'clicked';
+    }
     // Change depending on count
     if (count_around == 1){
-        table.rows[row].cells[col].className = 'clicked';
+        table.rows[row].cells[col].className = 'clicked_1';
     }
     else if (count_around == 2){
         table.rows[row].cells[col].className = 'clicked_2';
@@ -92,6 +99,21 @@ function check_surrounding(row, col, bomb_locations){
         }
     }
     return count;
+}
+
+
+function build_seen_board(row, col){
+    var seen = []
+
+    for (let i=0; i<row; i++){
+        var temp_row = []
+        for (let j=0; j<col; j++){
+            temp_row.push(0);
+        }
+        seen.push(temp_row);
+    }
+
+    return seen;
 }
 
 

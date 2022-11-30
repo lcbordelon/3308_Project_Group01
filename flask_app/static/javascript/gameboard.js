@@ -1,6 +1,6 @@
 const selected = [];
 
-var bomb_locations = fixed_bomb_locations();
+var bomb_locations = random_bomb();
 
 // Build a 9 by 9 gameboard and the function we want to run when the cell is clicked
 var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col, i) {
@@ -95,17 +95,35 @@ function check_surrounding(row, col, bomb_locations){
 }
 
 
-
-function random_bomb(number_of_bombs){
+function random_bomb(number_of_bombs = 9){
     // IN PROGRESS
     
     // Randomize 9 bombs
-    var bomb_location = []
-    
-    for (let i=0; i<9; i++){
-        var one = Math.floor(Math.random() * 10);
-        var two = Math.floor(Math.random() * 10);
+    const bomb_location = []
+    let i=0;
+    while (i<number_of_bombs){
+        var one = Math.floor(Math.random() * 9);
+        var two = Math.floor(Math.random() * 9);
+        let already_placed = false;
+        if (bomb_location.length === 0) {
+            bomb_location.push([one, two])
+            continue;
+        }
+        for (let j = 0; j < bomb_location.length; j++) {
+            if (bomb_location[j][0] === one && bomb_location[j][1] === two) {
+                already_placed = true;
+                break;
+            }
+        }
+        if (already_placed === false) {
+            bomb_location.push([one, two])
+            i++;
+        }
     }
+    for (let i = 0; i < bomb_location.length; i++) {
+        
+        console.log(bomb_location[i])
+    }   
     
     return bomb_location;
 }
@@ -114,7 +132,6 @@ function fixed_bomb_locations(){
     var bombs = [[1,2], [2,3], [3,4], [4,4], [5,5], [6,6], [7,7]]
     return bombs
 }
-
 
 // Add the new grid to our page
 document.body.appendChild(gameboard);

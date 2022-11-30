@@ -110,7 +110,7 @@ function random_bomb(number_of_bombs = 9){
             continue;
         }
         for (let j = 0; j < bomb_location.length; j++) {
-            if (bomb_location[0] === one && bomb_location[1] === two) {
+            if (bomb_location[j][0] === one && bomb_location[j][1] === two) {
                 already_placed = true;
                 break;
             }

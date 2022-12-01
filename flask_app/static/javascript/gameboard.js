@@ -6,15 +6,25 @@ var flag_map = build_seen_board(9, 9);
 var flag_count = 0;
 const flag_max = 10;
 
+var game_over = false;
+
 // Store bomb locations
 var bomb_locations = random_bomb();
 
 // Build a 9 by 9 gameboard and the function we want to run when the cell is clicked
 var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col, i) {
+    // Do nothing if game over 
+    if (game_over){
+        return false;
+    }
+
     // Check if the current row col is a bomb location
     if (location_map[row][col] == 3){
-        console.log("KABLAM!"); 
         element.innerHTML = "B";
+        console.log("You Lost ...");
+        alert("KABLAM!!!!");
+        game_over = true;
+        console.log(second);
         return false;
     }
 
@@ -25,13 +35,20 @@ var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col
         flag_count--;
     }
 
-    // Expand around 
+    // Expand around non numbered cell 
     expand(row, col, bomb_locations);
 
-    // Chheck if player wins!
+    // For debugging only!
+    console.log(location_map);
+
+    // Check if player wins!
     var status = check_winner();
     if (status){
+        // Log the users results
         console.log("WINNER");
+        console.log(second);
+        alert("WINNER!");
+        game_over = true;
     }
 });
 
@@ -59,12 +76,9 @@ function expand(row, col, bomb_locations){
         return false;
     }
 
-    // Check if the current row is a bomb location 
-    for (var b = 0; b < bomb_locations.length; b++) { 
-        if (bomb_locations[b][0] == row && bomb_locations[b][1] == col){
-            console.log("BOMB at ", row, col, ".. leaving blank"); 
-            return false;
-        }
+    // Check if the current recurse cell is a bomb location 
+    if (location_map[row][col] == 3){
+        return false;
     }
 
     // Stop if we have already revelead this tile or flagged it
@@ -92,6 +106,9 @@ function expand(row, col, bomb_locations){
     }
     else if (count_around == 3){
         table.rows[row].cells[col].className = 'clicked_3';
+    }
+    else if (count_around >= 4){
+        table.rows[row].cells[col].className = 'clicked_4';
     }
 
     // Break if this is a cell with a digit (Minesweeper rules)
@@ -135,14 +152,11 @@ function build_seen_board(row, col){
         }
         location_map.push(temp_row);
     }
-
     return location_map;
 }
 
 
 function random_bomb(number_of_bombs = 9){
-    // IN PROGRESS
-    
     // Randomize 9 bombs
     const bomb_location = []
     let i=0;
@@ -168,14 +182,10 @@ function random_bomb(number_of_bombs = 9){
     for (let i = 0; i < bomb_location.length; i++) {
         // Fill location array with bombs
         location_map[bomb_location[i][0]][bomb_location[i][1]] = 3;
-        console.log(bomb_location[i])
     }   
     
     return bomb_location;
 }
-
-// Add the new grid to our page
-document.body.appendChild(gameboard);
     
 // Build gameboard loop functionality 
 function build_gameboard(rows, cols, bomb_locations, cell_function){
@@ -204,6 +214,11 @@ function build_gameboard(rows, cols, bomb_locations, cell_function){
             // Add right click flag functionality 
             cell.addEventListener('contextmenu', (function(element, r,c,i){
                 return function(){
+                    // Do nothing if game is over 
+                    if (game_over){
+                        return false;
+                    }
+
                     var table = document.getElementsByClassName("gameboard")[0];
 
                     // Check if unflagging 
@@ -241,3 +256,14 @@ function build_gameboard(rows, cols, bomb_locations, cell_function){
     }
     return gameboard;
 }
+
+// Run timer every second, check if count is greater than 9 and change to review 0 or number
+var second = 0;
+function upTimer ( count ) { return count; }
+    setInterval( function(){
+        document.getElementById("seconds").innerHTML = upTimer(++second);
+    }, 1000);
+
+
+// Add the gameboard to our page
+document.body.appendChild(gameboard);

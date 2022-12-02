@@ -44,6 +44,10 @@ def login():
 def game():
     return render_template('gameboard.html', title="Game Page")
 
+@app.route('/leaderboard')
+def leaderboard():
+    return render_template('leaderboard.html', title="Top Scores")
+
 
 with app.test_request_context():
     print(url_for('index'))

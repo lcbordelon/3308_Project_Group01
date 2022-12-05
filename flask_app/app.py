@@ -44,6 +44,10 @@ def login():
 def game():
     return render_template('gameboard.html', title="Game Page")
 
+@app.route('/about')
+def about():
+    return render_template('about.html', title="About")
+
 @app.route('/leaderboard')
 def leaderboard():
     return render_template('leaderboard.html', title="Top Scores")
@@ -52,3 +56,5 @@ def leaderboard():
 with app.test_request_context():
     print(url_for('index'))
     print(url_for('game'))
+    print(url_for('about'))
+    print(url_for('leaderboard'))

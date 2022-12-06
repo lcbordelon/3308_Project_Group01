@@ -11,7 +11,7 @@ c.execute("INSERT INTO score VALUES('Frank', 60);")
 c.execute("INSERT INTO score VALUES('Jack', 75);")
 c.execute("INSERT INTO score VALUES('Jim', 45);")
 c.execute("INSERT INTO score VALUES('Karen', 15);")
-c.execute("INSERT INTO score VALUES('Jam,es', 30);")
+c.execute("INSERT INTO score VALUES('James', 30);")
 
 conn.commit()
 conn.close()

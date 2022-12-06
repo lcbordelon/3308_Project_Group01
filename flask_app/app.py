@@ -50,7 +50,11 @@ def about():
 
 @app.route('/leaderboard')
 def leaderboard():
-    return render_template('leaderboard.html', title="Top Scores")
+    #get the score values from the database file
+    conn = sqlite3.connect('flask_app/test.db')
+    scores = conn.execute('SELECT * FROM score ORDER BY time;').fetchall()
+    conn.close
+    return render_template('leaderboard.html', title="Top Scores", scores = scores)
 
 
 with app.test_request_context():

@@ -1,0 +1,5 @@
+windows.onload = filltable;
+
+filltable(){
+    
+}

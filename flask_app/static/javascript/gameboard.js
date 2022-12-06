@@ -6,7 +6,9 @@ var flag_map = build_seen_board(9, 9);
 var flag_count = 0;
 const flag_max = 10;
 
+// Game ending status conditions
 var game_over = false;
+var winner = false
 
 // Store bomb locations
 var bomb_locations = random_bomb();
@@ -21,10 +23,10 @@ var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col
     // Check if the current row col is a bomb location
     if (location_map[row][col] == 3){
         element.innerHTML = "B";
-        console.log("You Lost ...");
         alert("KABLAM!!!!");
         game_over = true;
-        console.log(second);
+
+        // console.log(second); // use this a score <--
         return false;
     }
 
@@ -38,16 +40,14 @@ var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col
     // Expand around non numbered cell 
     expand(row, col, bomb_locations);
 
-    // For debugging only!
-    console.log(location_map);
-
     // Check if player wins!
     var status = check_winner();
     if (status){
         // Log the users results
         console.log("WINNER");
-        console.log(second);
+        // console.log(second); // <-- use this as score
         alert("WINNER!");
+        winner = true;
         game_over = true;
     }
 });
@@ -240,8 +240,6 @@ function build_gameboard(rows, cols, bomb_locations, cell_function){
                             }
                         }
                     }
-
-                    console.log(flag_count);
                 }
             })(cell,r,c,i),false);
             
@@ -267,3 +265,80 @@ function upTimer ( count ) { return count; }
 
 // Add the gameboard to our page
 document.body.appendChild(gameboard);
+
+/* Unit Testing - Set to true to run tests */
+unit_test = false;
+if (unit_test == true){
+    check_number_of_bombs(10);
+    check_flag_count(10);
+    check_winning_condition();
+}
+
+
+function check_number_of_bombs(amount){
+    /*Count the bombs on the map and make sure they are correct number. */
+    var bomb_count = 0;
+    for (let i=0; i<location_map.length; i++){
+        for (let j=0; j<location_map[i].length; j++){
+            if (location_map[i][j] == 3){
+                bomb_count++;
+            }
+        }
+    }
+
+    if (bomb_count != amount){
+        console.log("FAIL Bomb Count");
+        return false;
+    }
+    console.log("PASS Bomb Count");
+}
+
+function check_flag_count(amount){
+    /* Set Flag count to limit and make sure we can't add more.*/
+    flag_count = amount;
+
+    // Simulare "Right CLick" on a cell
+    var table = document.getElementsByClassName("gameboard")[0];
+    var element = table.rows[0].cells[0];
+    if (window.CustomEvent) {
+        element.dispatchEvent(new CustomEvent('contextmenu'));
+    } else if (document.createEvent) {
+        var ev = document.createEvent('HTMLEvents');
+        element.dispatchEvent(ev);
+    } else { // Internet Explorer
+        element.fireEvent('oncontextmenu');
+    }
+
+    // Check if the flag was placed
+    if (element.innerHTML != "" || flag_count > 10){
+        console.log("FAIL Flag Check");
+    }
+    else{
+        console.log("PASS Flag Check")
+    }
+}
+
+function check_winning_condition(){
+    /*We win if we flag all the bomb locations*/
+    // Get table element
+    var table = document.getElementsByClassName("gameboard")[0];
+    var element;
+
+    for (let i=0; i<location_map.length; i++){
+        for (let j=0; j<location_map[i].length; j++){
+            
+            if (location_map[i][j] != 3){
+                element = table.rows[i].cells[j];
+                element.click();
+            }
+        }
+    }
+
+    if (winner == false){
+        console.log("FAIL Win Condition");
+        return false
+    }
+    console.log("PASS Win Condition");
+    return true;
+
+}

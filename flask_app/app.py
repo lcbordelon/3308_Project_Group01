@@ -49,12 +49,9 @@ def game():
 @app.route('/get_score', methods=['GET','POST'])
 def get_score():
     score = request.data
-    print(score)
     myscore = json.loads(score);
     name = myscore["name"]
     time = myscore["time"]
-    print(name)
-    print(time)
     #add the score to database
     conn = sqlite3.connect('database.db')
     c = conn.cursor()

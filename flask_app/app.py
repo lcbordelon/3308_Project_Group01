@@ -1,6 +1,5 @@
 import sqlite3
-from flask import Flask, redirect, g, url_for, request, render_template, make_response
-#from flask import Flask
+from flask import Flask, redirect, g, url_for, request, render_template, make_response, url_for
 
 app = Flask(__name__)
 
@@ -33,11 +32,19 @@ def get_db_connection():
 def index():
     return render_template('index.html', title="Index")
 
-@app.route('/login')
+@app.route('/login', methods=('GET', 'POST'))
 def login():
     conn = get_db_connection()
     users = conn.execute('SELECT * FROM users').fetchall()
-    conn.close()
+    # conn.close()
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        conn.execute('INSERT INTO users (username, pword) VALUES (?, ?)', (username, password))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('game'))
     return render_template('login.html', users = users)
 
 @app.route('/game')

@@ -32,6 +32,10 @@ def get_db_connection():
 def index():
     return render_template('index.html', title="Index")
 
+@app.route('/home')
+def home():
+    return render_template('index.html', title="Home")
+
 @app.route('/login', methods=('GET', 'POST'))
 def login():
     conn = get_db_connection()

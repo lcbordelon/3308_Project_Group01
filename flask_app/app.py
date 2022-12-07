@@ -1,5 +1,6 @@
 import sqlite3
-from flask import Flask, redirect, g, url_for, request, render_template, make_response
+import json
+from flask import Flask, redirect, g, url_for, request, render_template, make_response, jsonify
 #from flask import Flask
 
 app = Flask(__name__)
@@ -43,6 +44,24 @@ def login():
 @app.route('/game')
 def game():
     return render_template('gameboard.html', title="Game Page")
+
+#route for recieving score from game
+@app.route('/get_score', methods=['GET','POST'])
+def get_score():
+    score = request.data
+    print(score)
+    myscore = json.loads(score);
+    name = myscore["name"]
+    time = myscore["time"]
+    print(name)
+    print(time)
+    #add the score to database
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO score VALUES(?,?);", (name, time))
+    conn.commit()
+    conn.close()
+    return redirect('/game')
 
 @app.route('/about')
 def about():

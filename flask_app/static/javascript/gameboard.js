@@ -47,10 +47,20 @@ var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col
         console.log("WINNER");
         // console.log(second); // <-- use this as score
         alert("WINNER!");
+        get_winner_name();
         winner = true;
         game_over = true;
     }
 });
+
+function get_winner_name(){
+    let name = prompt("Enter name to add to leaderboard", "");
+    if (name == null || name == "") {
+      console.log("Score not saved");
+    } else {
+      console.log("Score saved as " + name + " (time)")
+    }
+}
 
 
 function check_winner(){

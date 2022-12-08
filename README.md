@@ -8,6 +8,7 @@ Project title: Minesweeper Game
 Team #: 01
 
 Team/Product Name: The Sweepers
+Deployed Site (using Render): https://minesweeper3308.onrender.com/home
 
 Team members: Lindsay Bordelon, lcbordelon, libo1105@colorado.edu
 Nathan Hutchins, nhutchins96, nahu7321@colorado.edu

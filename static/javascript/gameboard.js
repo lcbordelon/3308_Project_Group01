@@ -47,10 +47,39 @@ var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col
         console.log("WINNER");
         // console.log(second); // <-- use this as score
         alert("WINNER!");
+        get_winner_name();
         winner = true;
         game_over = true;
     }
 });
+
+//prompt for user to enter their name on the score list
+function get_winner_name(){
+    time = document.getElementById("seconds").innerHTML
+    let name = prompt("Enter name to add to leaderboard", "");
+    if (name == null || name == "") {
+      console.log("Score not saved");
+    } else {
+        if(name.legnth > 20){
+            name = name.substring(0,20);
+        }
+        console.log("Score saved as " + name + " Time: " + time)
+        //send name back to flask app
+        time = document.getElementById("seconds").innerHTML
+        var scores = {
+            'name': name,
+            'time': time
+        }
+        //get url to change to url with post function
+        var URL = window.location.href
+        URL = URL.substring(0,-4)
+        URL = URL + "get_score"     
+        const xml = new XMLHttpRequest();
+        sender = JSON.stringify(scores)
+        xml.open('POST',URL);
+        xml.send(sender)
+    }
+}
 
 
 function check_winner(){

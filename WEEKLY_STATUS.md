@@ -35,3 +35,6 @@ Natalie - Accomplished the gameboard, 9x9 display. Working on About page.
 
 Storing player's score and displaying on scoreboard
 ![WeeklyStatusNov28](Img/WeeklyUpdate_11282022.png?raw=true "Title")
+
+12/07/2022
+Deployed app to Render, worked on presentation powerpoint, fixed navbar to match on each page.

@@ -25,8 +25,6 @@ var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col
         element.innerHTML = "B";
         alert("KABLAM!!!!");
         game_over = true;
-
-        // console.log(second); // use this a score <--
         return false;
     }
 
@@ -56,29 +54,20 @@ var gameboard = build_gameboard(9, 9, bomb_locations, function(element, row, col
 //prompt for user to enter their name on the score list
 function get_winner_name(){
     time = document.getElementById("seconds").innerHTML
-    let name = prompt("Enter name to add to leaderboard", "");
-    if (name == null || name == "") {
-      console.log("Score not saved");
-    } else {
-        if(name.legnth > 20){
-            name = name.substring(0,20);
-        }
-        console.log("Score saved as " + name + " Time: " + time)
-        //send name back to flask app
-        time = document.getElementById("seconds").innerHTML
-        var scores = {
-            'name': name,
-            'time': time
-        }
-        //get url to change to url with post function
-        var URL = window.location.href
-        URL = URL.substring(0,-4)
-        URL = URL + "get_score"     
-        const xml = new XMLHttpRequest();
-        sender = JSON.stringify(scores)
-        xml.open('POST',URL);
-        xml.send(sender)
+    //send name back to flask app
+    var scores = {
+        'time': time
     }
+    //get url to change to url with post function
+    var URL = window.location.href
+    URL = URL.substring(0,-4)
+    URL = URL + "get_score" 
+
+    // Send data to python
+    const xml = new XMLHttpRequest();
+    sender = JSON.stringify(scores)
+    xml.open('POST',URL);
+    xml.send(sender)
 }
 
 

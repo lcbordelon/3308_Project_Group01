@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="static/css/login.css" />
-    <title>Login</title>
+    <title>Minesweeper</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="../static/css/login.css">
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand nav-link" href="{{ url_for('game') }}">GAME!</a>
+        <a class="navbar-brand nav-link" href="{{ url_for('game') }}">PLAY NOW!</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -28,16 +28,26 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{{ url_for('home') }}"
+                >Home</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('leaderboard') }}">Scores</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('about') }}">About</a>
+              <a class="nav-link" aria-current="page" href="{{ url_for('about') }}">About</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
             </li>
           </ul>
         </div>
@@ -45,30 +55,50 @@
     </nav>
   </head>
   <body>
-    <form method="post">
-      <label for="title">Title</label>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <p class="error_message"> {{ message }} </p>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+    <div class="login">
+      <form method="post">
+        <h1 class="col-centered text-center">Login</h1>
+        <div class="col-md-12 text-center"">
+          <input type="text" class="custom_form"name="username" placeholder="Username" value="{{ request.form['username'] }}"></input>
+        </div>
 
-      {% block content %}
-      <h1>Login Page</h1>
-      <input type="text" name="username" placeholder="Username" value="{{ request.form['username'] }}"></input>
-      <textarea name="password" placeholder="password">{{ request.form['password'] }}</textarea>
-      {% for user in users %}
-      <div class="user">
-        <p>User Information:</p>
-        <h2 class="username">{{ user['username'] }}</h2>
-        <p class="password">{{ user['pword'] }}</p>
-      </div>
-      {% endfor %} {% endblock %}
+        <div class="col-centered text-center">
+          <input type="text" class="custom_form" name="password" placeholder="Password" value="{{ request.form['password'] }}"></input>
+        </div>
 
-      <button type="submit">Submit</button>
-    </form>
+        <div class="col-centered text-center">
+          <button type="submit" class="btn btn-primary custom_button">Login</button>
+        </div>
 
+        <h1 class="col-centered text-center">Create User Account</h1>
+        <div class="col-md-12 text-center"">
+          <input type="text" class="custom_form" name="create_username" placeholder="Create Username" value="{{ request.form['create_username'] }}"></input>
+        </div>
+
+        <div class="col-centered text-center">
+          <input type="text" class="custom_form" name="create_password" placeholder="Create Password" value="{{ request.form['create_password'] }}"></input>
+        </div>
+        
+        <div class="col-centered text-center">
+          <button type="submit" class="btn btn-primary custom_button">Create</button>
+        </div>
+
+      </form>
+    </div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
-    <script src="static/javascript/login.js"></script>
   </body>
 </html>

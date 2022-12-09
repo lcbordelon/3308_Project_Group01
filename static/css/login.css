@@ -1,2 +1,33 @@
 
+.login{
+    top: 30%;
+    left: 50%;
+    margin-top: -9em;
+    margin-left: -11.7em;
+    position: fixed;
+    font-family:Verdana !important;
+}
 
+.col-centered{
+    float: none;
+    margin: 0 auto;
+    padding: 2%;
+}
+
+.custom_form{
+    border: 2px solid rgb(185, 172, 172);
+    border-radius: 4px;
+    padding: 2%;
+}
+
+.custom_form:hover{
+    border: 2px solid rgb(109, 96, 96);
+    background-color: rgb(247, 240, 240);
+}
+
+.error_message{
+    margin-top: 2%;
+    color: rgb(153, 153, 153);
+    text-align: center;
+    font-size: medium;
+}

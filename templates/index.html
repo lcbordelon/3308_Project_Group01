@@ -12,7 +12,7 @@
     />
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand nav-link" href="{{ url_for('game') }}">GAME!</a>
+        <a class="navbar-brand nav-link" href="{{ url_for('game') }}">PLAY NOW!</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -38,16 +38,15 @@
               <a class="nav-link" href="{{ url_for('leaderboard') }}">Scores</a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="{{ url_for('about') }}"
-                >About</a
-              >
+              <a class="nav-link" aria-current="page" href="{{ url_for('about') }}">About</a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
             </li>
           </ul>
         </div>

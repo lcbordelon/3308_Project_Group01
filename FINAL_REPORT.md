@@ -1,5 +1,7 @@
 ● Project Title: Minesweeper
+
 ● Team members’ names: Lindsay Bordelon, Natalie Dreher, Zach Hill, Nathan Hutchins
+
 ● Project Tracker Link: https://trello.com/b/9Raczcf9/cspb3308-project
 ● Link to 5-minute video: https://github.com/lcbordelon/3308_Project_Group01/blob/main/DemoVideo.md
 ● Version control repository link: https://github.com/lcbordelon/3308_Project_Group01

@@ -3,12 +3,18 @@
 ● Team members’ names: Lindsay Bordelon, Natalie Dreher, Zach Hill, Nathan Hutchins
 
 ● Project Tracker Link: https://trello.com/b/9Raczcf9/cspb3308-project
+
 ● Link to 5-minute video: https://github.com/lcbordelon/3308_Project_Group01/blob/main/DemoVideo.md
+
 ● Version control repository link: https://github.com/lcbordelon/3308_Project_Group01
+
 ● List your public hosting site and make sure that it is available: https://minesweeper3308.onrender.com/
+
 ● Include a Final Status Report
+
 o What you completed
-▪ Home page listing group members. Includes a navigation bar to play the game, access the Home page, Scores page, About page, Login/Logout pages.
+
+▪ Home page listing group members. Includes a navigation bar to play the game, access the Home page, Scores page, About page, Login/Logout pages.  
 ▪ Login/Logout page – A user must create a user account and login before they can play the game. Once a user logs in or creates an account, they have access to all the pages and their scores will be stored with their username and displayed on the Scores page when they win. The username and password are stored in an SQLite database and we keep track of the current user with flask sessions.
 ▪ Game page – the game mimics Minesweeper. Clicking on a square will either reveal more squares with numbers representing the number of nearby mines, or a mine. Clicking on a mine ends the game and displays a ‘KABLAM!’ message. You can also right click on any cell and mark it as a flag. The player has a limited number of flags.
 ▪ Once a user has completed the game; their score will display on the Scores page scoreboard with their username. The username and score are stored in an SQLite database.
